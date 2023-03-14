@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -empty -ls 2>/dev/null | rev |cut -d " " -f 1 | rev
+find . -empty | rev |cut -d "/" -f 1 | rev 
