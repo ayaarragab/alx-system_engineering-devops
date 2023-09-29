@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # The content of the current directory
 mapfile -t currentdirlist < <(ls)
 
