@@ -1,20 +1,7 @@
 #!/usr/bin/env bash
 # The content of the current directory
-mapfile -t currentdirlist < <(ls)
 
-for file in "${currentdirlist[@]}"
+for item in *
 do
-    if [ -f "$file" ] || [ -d "$file" ]
-    then
-        onlypart=$file
-        if [ "${file:1:1}" == "-" ] || [ "${file:2:1}" == "-" ]
-        then    
-            onlypart="${file:2}"
-        fi
-        if [ "${onlypart:0:1}" == "-" ]
-        then
-            onlypart="${onlypart:1}"
-        fi
-        echo "$onlypart"
-    fi
+    echo "$item" | cut -d '-' -f 2
 done
