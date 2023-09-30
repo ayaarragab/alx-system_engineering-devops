@@ -18,7 +18,7 @@ fi
 if [ $count -eq 1 ]
 then
     content="$(cat $filename)"
-    if [ -z $content ]
+    if [ -z "$content" ]
     then
         echo "school file is empty"
     else
