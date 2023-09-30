@@ -1,1 +1,31 @@
 #!/usr/bin/env bash
+# a Bash script that gives you information about the school file.
+filename="school"
+count=0 #0 for nothing, 1 file, 2 folder
+if [ -f $filename ]
+then
+    echo "school file exists"
+    count=1
+elif [ -d $filename ]
+then
+    echo "school file exists"
+    count=2
+else
+    count=0
+    echo "school file does not exist"
+fi
+
+if [ $count -eq 1 ]
+then
+    content="$(cat $filename)"
+    if [ -z $content ]
+    then
+        echo "school file is empty"
+    else
+        echo "school file is not empty"
+    fi
+    echo "school is a regular file"
+elif [ $count -eq 2 ]
+then
+    echo "school file is not empty"    
+fi
