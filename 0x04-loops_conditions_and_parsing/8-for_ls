@@ -4,7 +4,7 @@ mapfile -t currentdirlist < <(ls)
 
 for file in "${currentdirlist[@]}"
 do
-    if [ -f $file ]
+    if [ -f "$file" ]
     then
         onlypart=$file
         if [ "${file:1:1}" == "-" ] || [ "${file:2:1}" == "-" ]
