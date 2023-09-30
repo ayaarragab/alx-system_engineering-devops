@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+# 10. FizzBuzz"
 for i in {1..100}
 do
     if [ $((i % 3)) -eq 0 ] && [ $((i % 5)) -eq 0 ]
@@ -15,4 +15,3 @@ do
         echo "$i"
     fi
 done
-
