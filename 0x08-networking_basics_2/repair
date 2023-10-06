@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# a Bash script that configures an Ubuntu server with specific requirements
+touch ~/hosts2 ~/hosts
+cp /etc/hosts ~/hosts2
+sed -i 's/^127\.0\.0\.2*/127.0.0.1 localhost/' ~/hosts2
+head -n -1 ~/hosts2 > ~/hosts
+cp -f ~/hosts /etc/hosts
