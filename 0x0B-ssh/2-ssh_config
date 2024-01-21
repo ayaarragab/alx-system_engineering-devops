@@ -1,0 +1,3 @@
+Host DESKTOP-5SSESR3
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
