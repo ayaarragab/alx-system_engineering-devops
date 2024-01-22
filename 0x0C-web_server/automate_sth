@@ -1,0 +1,8 @@
+#!/bin/bash
+
+line="#!/usr/bin/env bash"
+
+for file in *; do
+  echo "$line" >> "$file"
+done
+#!/usr/bin/env bash
