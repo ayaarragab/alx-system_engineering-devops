@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 # comment
-sudo sed -i '/server {/a\    location /redirect_me {\
-    return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\
-}' /etc/nginx/sites-available/default
+
+config_file="/etc/nginx/sites-available/default"
+temp_file=$(mktemp)
+
+# Use awk to insert the new location block after the line containing 'server {'
+awk '/server {/ { print; print "    location /redirect_me {"; print "        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;"; next }1' "$config_file" > "$temp_file"
+
+# Replace the original configuration file with the modified one
+sudo mv "$temp_file" "$config_file"
