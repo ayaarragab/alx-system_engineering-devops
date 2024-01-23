@@ -1,1 +1,7 @@
 #!/usr/bin/env bash
+# comment
+config_file="/etc/nginx/sites-available/default"
+temp_file=$(mktemp)
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
+awk '/server {/ { print; print "    error_page 404 /404.html;"; print "    location = /404.html {"; print "        root /var/www/html;"; print "        internal;"; print "    }"; next }1' "$config_file" > "$temp_file"
+sudo mv "$temp_file" "$config_file"
