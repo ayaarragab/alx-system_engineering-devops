@@ -1,1 +1,12 @@
 #!/usr/bin/env bash
+# comment to explain
+apt-get -y update
+apt-get -y  install nginx
+mkdir -p hello && echo "Hello World!" > hello/index.html
+sed -i '/http {/,/}/c\
+http {\
+    server {\
+        listen 80;\
+        root /home/ubuntu/hello/;\
+    }' /etc/nginx/nginx.conf
+nginx -s reload
