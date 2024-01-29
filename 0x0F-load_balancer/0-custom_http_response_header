@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # script configures an Ubuntu machine to the requirements asked in this task
 sudo apt -y update
 sudo apt install -y nginx
