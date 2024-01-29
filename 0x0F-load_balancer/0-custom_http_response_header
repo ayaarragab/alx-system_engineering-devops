@@ -1,6 +1,6 @@
 #!/bin/bash
 # script configures an Ubuntu machine to the requirements asked in this task
-sudo apt update
+sudo apt -y update
 sudo apt install -y nginx
 sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
 echo "server {
