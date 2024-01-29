@@ -1,0 +1,6 @@
+#!/bin/bash
+# script configures an Ubuntu machine to the requirements asked in this task
+sudo apt update
+sudo apt install -y nginx
+sudo sed -i "s/http{/http{\n add_header X-Served-By $hostname;/g" /etc/nginx/nginx.conf
+sudo service nginx restart 
