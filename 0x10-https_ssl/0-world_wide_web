@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# what record domain type
+
+what_record()
+{
+    $ouputted_line=$(dig $1 | grep -A1 'ANSWER SECTION:')
+    $record_type=$(awk "{print $2}" $ouputted_line)
+    $website=$(awk "{print $1}" $ouputted_line)
+    $subdomain=$(awk -F ':' "{print $1}" $website)
+    $dest=$(awk "{print $5}" $ouputted_line)
+    echo "The subdomain $subdomain is a $record_type record and points to $dest"
+}
