@@ -20,6 +20,7 @@ exec { 'echo_command':
      root        /var/www/html;
      index       index.html index.htm;
   }" > /etc/nginx/sites-available/default',
+  path   => '/usr/bin/echo',
 } ->
 
 exec { "sudo echo 'Ceci n'est pas une page' > /usr/share/nginx/html/custom_404.html":
