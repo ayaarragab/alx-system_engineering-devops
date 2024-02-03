@@ -10,6 +10,10 @@ package { 'nginx':
  require  => Exec['update'],
 }
 
+exec { 'nginx start':
+  path => '/etc/init.d/'
+}
+
 exec { "sudo sh -c 'echo 'Hello World!'' > /var/www/html/index.html":
   path => '/usr/bin/sudo:/bin:/usr/bin:/usr/sbin',
 }
