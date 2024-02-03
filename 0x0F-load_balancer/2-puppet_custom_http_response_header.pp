@@ -42,5 +42,5 @@ exec {'sudo sed -i "s/http{/http{\n add_header X-Served-By $hostname;/g" /etc/ng
 
 exec { 'nginx restart':
   path    => '/etc/init.d/',
-  require => [Exec['apt_update'], Package['nginx'], File['/etc/nginx/sites-available/default']],
+  require => [Exec['update'], Package['nginx'], File['/etc/nginx/sites-available/default']],
 }
