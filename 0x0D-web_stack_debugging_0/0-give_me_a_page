@@ -1,4 +1,3 @@
 #!/usr/bin/env bash
 #Starting apache2 server
-docker exec -it $(docker ps --format "{{.ID}}") /bin/bash
-sudo service apache2 start
+service apache2 restart
