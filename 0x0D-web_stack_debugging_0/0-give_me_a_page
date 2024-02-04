@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 #Starting apache2 server
+docker exec -it 8680ae475d11 /bin/bash
 sudo service apache2 start
