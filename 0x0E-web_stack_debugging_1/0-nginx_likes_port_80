@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# web stack debugging 1
+sudo apt update -y
+sudo apt install nginx -y
+sudo service nginx start
