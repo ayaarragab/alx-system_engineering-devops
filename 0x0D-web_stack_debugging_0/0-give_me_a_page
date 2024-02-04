@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-# ex
-echo "Hello Holberton" > /var/www/html/index.html
+#Starting apache2 server
+
 service apache2 start
