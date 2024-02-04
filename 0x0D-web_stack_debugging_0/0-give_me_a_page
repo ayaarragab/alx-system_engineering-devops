@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
 #Starting apache2 server
-
-service apache2 start
+sudo apt updatet
+sudo apt install apache2
+sudo service apache2 start
+sudo echo "<VirtualHost *:8080>
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>" >> /etc/apache2/sites-available/000-default.conf
+sudo echo "Servername localhost" >> /etc/apache2/apache2.conf
+sudo echo "Listen 8080" >> /etc/apache2/ports.conf
+sudo service apache2 restart
