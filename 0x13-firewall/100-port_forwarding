@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# 100-port_forwarding.sh
+sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
