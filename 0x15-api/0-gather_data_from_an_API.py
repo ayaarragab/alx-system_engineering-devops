@@ -2,16 +2,32 @@
 """
 python script gathers data from a rest API
 """
-import requests
-import sys
 
 
-if __name__ == "__main__":
-    url = "https://jsonplaceholder.typicode.com/"
-    user = requests.get(url + "users/{}".format(sys.argv[1])).json()
-    todos = requests.get(url + "todos", params={"userId": sys.argv[1]}).json()
+if __name__ == '__main__':
+    from requests import get
+    from sys import argv
 
-    completed = [t.get("title") for t in todos if t.get("completed") is True]
-    print("Employee {} is done with tasks({}/{}):".format(
-        user.get("name"), len(completed), len(todos)))
-    [print("\t {}".format(c)) for c in completed]
+    if len(argv) > 1:
+        user_Id = argv[1]
+        url = 'https://jsonplaceholder.typicode.com/'
+        user_request = get("{}users/{}".format(url, user_Id))
+        name = user_request.json().get('name')
+        if name is not None:
+            todo_request = get(
+                "{}todos?userId={}".format(url, user_Id)).json()
+        number_of_tasks = len(todo_request)
+        completed_tasks = list()
+        for task in todo_request:
+            if task.get('completed') is True:
+                completed_tasks.append(task)
+        len_completed = len(completed_tasks)
+        print("Employee {} is done with tasks({}/{}):".format(
+              name, len_completed, number_of_tasks))
+        for task in completed_tasks:
+            print("\t {}".format(task.get('title')))
+        with open('student_output', 'w') as f:
+            f.write("Employee {} is done with tasks({}/{}):".format(
+              name, len_completed, number_of_tasks))
+            for task in completed_tasks:
+                f.write("\t {}".format(task.get('title')))
