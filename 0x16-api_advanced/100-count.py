@@ -17,7 +17,12 @@ def count_words(subreddit, word_list, word_counts=None, after=None):
 
     headers = {'User-Agent': "My-User-Agent"}
     url = f'https://www.reddit.com/r/{subreddit}/hot.json?limit=10'
-    response = requests.get(url, headers=headers, allow_redirects=False, params={'after': after})
+    response = requests.get(
+        url,
+        headers=headers,
+        allow_redirects=False,
+        params={
+            'after': after})
 
     if response.status_code != 200:
         return
@@ -31,10 +36,14 @@ def count_words(subreddit, word_list, word_counts=None, after=None):
             for title__ in splitted:
                 if word.lower() == title__:
                     word_counts[word] += 1
-    
+
     if data.get('data').get('after'):
-        count_words(subreddit, word_list, word_counts, data.get('data').get('after'))
-    
-    if after is None:  # Only print results after all recursive calls have completed
+        count_words(
+            subreddit,
+            word_list,
+            word_counts,
+            data.get('data').get('after'))
+
+    if after is None:
         sorted_counts = sorted(word_counts.items(), key=lambda kv: kv[0])
         [print('{}: {}'.format(k, v)) for k, v in sorted_counts if v != 0]
