@@ -3,7 +3,6 @@
 This script is used to retrieve and display the top ten
 posts from a Reddit subreddit.
 """
-import requests
 
 
 def top_ten(subreddit):
@@ -11,6 +10,9 @@ def top_ten(subreddit):
     Queries the Reddit API and prints the titles of the first
     10 hot posts listed for a given subreddit.
     """
+
+    import requests
+
     headers = {'Accept': 'application/json',
                'User-Agent': ' '.join([
                    'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
