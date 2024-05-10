@@ -29,4 +29,5 @@ def top_ten(subreddit):
                 for child in children:
                     print(child.get('data').get('title'))
                 return
-    print('None')
+    elif response.status_code >= 300:
+        print('None')
