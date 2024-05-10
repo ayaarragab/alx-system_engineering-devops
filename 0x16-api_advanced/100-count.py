@@ -7,7 +7,7 @@ javascript, but java should not).
 """
 
 
-def count_words(subreddit, word_list, index=0, word_counts=None):
+def count_words(subreddit, word_list, word_counts=None, after=None):
     """
     a recursive function that queries the Reddit API, parses the title of all
     hot articles, and prints a sorted count of given keywords
@@ -15,27 +15,24 @@ def count_words(subreddit, word_list, index=0, word_counts=None):
     javascript, but java should not).
     """
     import requests
+
+    word_list = list(dict.fromkeys(word_list))
+
     if word_counts is None:
         word_counts = {word.lower(): 0 for word in word_list}
 
-    if index >= len(word_list):
-        sorted_counts = {
-            k: v for k,
-            v in sorted(
-                word_counts.items(),
-                key=lambda item: item[1],
-                reverse=True)}
-        return sorted_counts
-
-    headers = {'User-Agent': 'Mozilla/5.0'}
+    headers = {'User-Agent': "My-User-Agent"}
     url = f'https://www.reddit.com/r/{subreddit}/hot.json?limit=10'
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers, allow_redirects=False, params={'after': after})
     data = response.json()
     articles = data['data']['children']
-
-    for article in articles:
-        title = article['data']['title'].lower()
-        if word_list[index].lower() in title:
-            word_counts[word_list[index].lower()] += 1
-
-    return count_words(subreddit, word_list, index + 1, word_counts)
+    titles = [article['data']['title'] for article in articles]
+    for title in titles:
+        for word in word_list:
+            if word.lower() in title.lower():
+                word_counts[word] += 1
+    if data.get('data').get('after'):
+        count_words(subreddit, word_list, word_counts, data.get('data').get('after'))
+    else:
+        sorted_counts = sorted(word_counts.items(), key=lambda kv: kv[0])
+        [print('{}: {}'.format(k, v)) for k, v in sorted_counts if v != 0]
