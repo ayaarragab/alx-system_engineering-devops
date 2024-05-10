@@ -13,14 +13,8 @@ def top_ten(subreddit):
 
     import requests
 
-    headers = {'Accept': 'application/json',
-               'User-Agent': ' '.join([
-                   'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
-                   'AppleWebKit/537.36 (KHTML, like Gecko)',
-                   'Chrome/97.0.4692.71',
-                   'Safari/537.36',
-                   'Edg/97.0.1072.62'
-               ])}
+    headers = {'User-Agent': "My-User-Agent"}
+
     url = 'https://www.reddit.com/r/{}/hot/.json?limit=10'.format(subreddit)
     response = requests.get(url, headers=headers, allow_redirects=False)
     if response.status_code == 200:
